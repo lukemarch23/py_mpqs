@@ -47,13 +47,13 @@ def algebra(factorbase,smooths,settings):
             return g
     return None
  
-def qs(n):
-    print "Factoring a",int(log(n,10)+1),"digit number"
+def qs(n,verbose=0):
+    if verbose:
+        print "Factoring a",int(log(n,10)+1),"digit number"
     root2n=isqrt(2*n)
     bound=int(5*log(n,10)**2)
  
     factorbase = [2]+[x for x in prime_sieve(bound) if legendre_symbol(n,x)==1]
-    print factorbase[-1]
     tsqrt=[]
     tlog=[]
     for p in factorbase:
@@ -62,7 +62,6 @@ def qs(n):
         tlog.append(log(p,10))
         
     xmax = len(factorbase)*60*4
-    print xmax
     m_val = (xmax * root2n) >> 1
     thresh = log(m_val, 10) * 0.735
     #ignore small primes
@@ -134,8 +133,10 @@ def qs(n):
                         partials[nf]=(a*x+b,(tofact,roota))
         if len(smooths)>len(factorbase):
             break
-        #print 100*len(smooths)/len(factorbase),'%','using',polynomials,'polynomials','\r',
-    print len(smooths),"relations found using",polynomials,"polynomials"
+        if verbose:
+            print 100*len(smooths)/len(factorbase),'%','using',polynomials,'polynomials','\r',
+    if verbose:
+        print len(smooths),"relations found using",polynomials,"polynomials"
     return algebra(factorbase,smooths,n)
  
 if __name__ == "__main__":
