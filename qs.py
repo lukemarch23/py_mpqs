@@ -54,13 +54,14 @@ def qs(n,verbose=0):
     bound=int(5*log(n,10)**2)
  
     factorbase = [2]+[x for x in prime_sieve(bound) if legendre_symbol(n,x)==1]
+    if verbose:
+        print "Largest Prime Factor used is",factorbase[-1]
     tsqrt=[]
     tlog=[]
     for p in factorbase:
         ms=int(modular_sqrt(n,p))
         tsqrt.append(ms)
         tlog.append(log(p,10))
-        
     xmax = len(factorbase)*60*4
     m_val = (xmax * root2n) >> 1
     thresh = log(m_val, 10) * 0.735
@@ -147,7 +148,7 @@ if __name__ == "__main__":
 	#print qs(99877*99991)
 	t1=time()
 	#print qs(2736300383840445596906210796102273501547527150973747)
-	print qs(523022617466601111760007224100074291200000001)
+	print qs(523022617466601111760007224100074291200000001,1)
 	#print qs(676292275716558246502605230897191366469551764092181362779759 )
 	#print qs(53468946676763197941455249471721044636943883361749)
 	print time()-t1
