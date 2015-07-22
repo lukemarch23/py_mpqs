@@ -126,6 +126,7 @@ def qs(n,verbose=0):
                     	while nf%p==0:nf=int(nf/p)
                     if nf==1:
                         smooths+=[(a*x+b,(tofact,roota))]
+                    #check for 1 big factor
                     elif nf in partials:
                         pairv,pairvals=partials[nf]
                         smooths+=[( (a*x+b)*pairv, ( tofact*pairvals[0],roota*pairvals[1]*nf) )]
