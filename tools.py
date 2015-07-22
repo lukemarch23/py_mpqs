@@ -143,6 +143,6 @@ def next_prime(n):
             if n%p==0:q= 0;break
         if q==0:n+=2;continue
         else : break
-        if miller_rabin(n,10):break
+        if miller_rabin(n,5):break
         n+=2
     return n
